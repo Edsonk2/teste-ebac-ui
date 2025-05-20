@@ -53,7 +53,7 @@ describe("Fucionalidade: Login", () => {
   });
   it("Deve fazer login com sucesso - Usando Fixture", () => {
     cy.fixture("perfil").then((dados) => {
-      cy.get("#username").type(dados.usuario, {log: false});
+      cy.get("#username").type(dados.usuario, { log: false });
       cy.get("#password").type(dados.senha, { log: false });
       cy.get(".woocommerce-form > .button").click();
       cy.get(".woocommerce-MyAccount-content > :nth-child(2)").should(
@@ -61,5 +61,12 @@ describe("Fucionalidade: Login", () => {
         "Olá, edsonbrasiloliveira3 (não é edsonbrasiloliveira3? Sair"
       );
     });
+  });
+  it.only("Deve fazer login com sucesso - usando Comandos constumizado", () => {
+    cy.login("edsonbrasiloliveira3@gmail.com", "323250@@");
+    cy.get(".woocommerce-MyAccount-content > :nth-child(2)").should(
+      "contain",
+      "Olá, edsonbrasiloliveira3 (não é edsonbrasiloliveira3? Sair"
+    );
   });
 });
